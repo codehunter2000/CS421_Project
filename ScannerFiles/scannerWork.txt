@@ -1,0 +1,19 @@
+Submit this with the executable.
+
+Group#:
+
+1.	Indicate who did what by giving names:
+o	Member A tasks (NFA to DFA) - who:    
+o	Member B tasks (DFA functions)- who:    
+o	Member C tasks (scanner())- who:
+
+If the member did not fully contribute to the assigned part, do not list his/her name!!!!!
+
+2.     Each person came to the meeting?
+
+3.     You have included all the required comments? (RE and Programmer)
+
+4.     Your program works on scannertest1 and scannertest2?
+
+5.     Any other remarks.
+
