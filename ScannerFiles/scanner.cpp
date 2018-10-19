@@ -44,13 +44,43 @@ bool mytoken(string s)
 
 // ** Update the tokentype to be WORD1, WORD2, PERIOD, ERROR, etc.
 // Feel free to add a tokentype for the end-of-file marker.
-enum tokentype {ERROR, };
+enum tokentype {ERROR, WORD1, WORD2, PERIOD, VERB, VERBNEG, VERBPAST,
+	VERBPASTNEG, IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, 
+	CONNECTOR, EOFM};
 
 // ** string tokenName[30] = { }; for the display names of tokens
 
 // ** Need the reservedwords table to be set up here. 
 // ** Do not require any file input for this.
 // ** a.out should work without any additional files.
+
+string letters[30] = {"b", "d", "g", "h", "j", "k", "m", "n", "p", "r", "s", "t", "w", 
+	"y", "z", "ch", "a", "i", "u", "e", "o", "I", "E", "."};
+
+// word and token
+string reservedWords[19][19] = {
+{"masu", "VERB"}, 
+{"masen", "VERBNEG"},
+{"mashita", "VERBPAST"},
+{"masendeshita","VERBPASTNEG"},
+{"desu","IS"},
+{"deshita","WAS"},
+{"o","OBJECT"},
+{"wa","SUBJECT"},
+{"ni","DESTINATION"}, 
+{"watashi","PRONOUN"}, 
+{"anata","PRONOUN"}, 
+{"kare","PRONOUN"}, 
+{"kanojo","PRONOUN"}, 
+{"sore","PRONOUN"}, 
+{"mata","CONNECTOR"},
+{"soshite","CONNECTOR"}, 
+{"shikashi","CONNECTOR"}, 
+{"dakara","CONNECTOR"}, 
+{"eofm","EOFM"} 
+};
+
+
 
 
 // ------------ Scaner and Driver ----------------------- 
