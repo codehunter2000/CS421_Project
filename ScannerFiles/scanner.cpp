@@ -1,112 +1,229 @@
+
+//=====================================================
+// File scanner.cpp written by: Group Number: 4
+// Done by: Micah McCarver
+//=====================================================
+
+
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<cctype>
+#include<cstdlib>
 using namespace std;
 
-//=====================================================
-// File scanner.cpp written by: Group Number: ** 
-//=====================================================
 
-// --------- DFAs ---------------------------------
-
-// ** MYTOKEN DFA to be replaced by the WORD DFA
-// ** Done by:
-// ** RE:
-bool mytoken(string s)
+// MYTOKEN DFA to be replaced by the WORD DFA
+// RE:   dfa replaced by word dfa
+ 
+bool word(string s)
 {
-  int state = 0;
+  int state = 0; //declarations
   int charpos = 0;
-
-  while (s[charpos] != '\0') 
+  
+  while (s[charpos] != '\0') //charpos of letters
     {
-      if (state == 0 && s[charpos] == 'a')
-      state = 1;
+      if(state == 0 && (s[charpos] == 'b' ||s[charpos] == 'g' || s[charpos] == 'h' || s[charpos] == 'k' || s[charpos] == 'm' || s[charpos] == 'n' || s[charpos] == 'r'))
+  state = 1;
+      else 
+      if (state == 0 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E')) 
+  state = 2;    
+      else 
+      if (state == 0 && (s[charpos] == 'd' || s[charpos] == 'j' || s[charpos] == 'w' || s[charpos] == 'y' || s[charpos] == 'z'))
+  state = 3;   
+      else 
+      if (state == 0 && s[charpos] == 's')
+  state = 4; 
+      else 
+      if (state == 0 && s[charpos] == 'c')
+  state = 5;
+      else 
+      if (state == 0 && s[charpos] == 't')
+  state = 6;
+      else 
+      if (state == 1 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))   
+  state = 2;
+      else 
+      if (state == 1 && s[charpos] == 'y')
+  state = 3;
+      else 
+      if (state == 2 && s[charpos] == 'n')
+  state = 0;
+      else 
+      if (state == 2 && (s[charpos] == 'b' ||s[charpos] == 'g' || s[charpos] == 'h' || s[charpos] == 'k' || s[charpos] == 'm' || s[charpos] == 'n' || s[charpos] == 'r'))
+  state = 1;
+      else 
+      if (state == 2 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))   
+  state = 2;
+      else 
+      if (state == 2 && (s[charpos] == 'd' || s[charpos] == 'j' || s[charpos] == 'w' || s[charpos] == 'y' || s[charpos] == 'z'))
+  state = 3;
+      else 
+      if (state == 2 && s[charpos] == 's')
+  state = 4;
+      else 
+      if (state == 2 && s[charpos] == 'c')
+  state = 5;
+      else 
+      if (state == 2 && s[charpos] == 't')
+  state = 6;
+      else 
+      if (state == 3 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))
+  state = 2;
+      else 
+      if (state == 4 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))
+  state = 2;
+      else 
+      if (state == 4 && s[charpos] == 'h')
+  state = 3;
+      else 
+      if (state == 5 && s[charpos] == 'h')
+  state = 3;
+      else 
+      if (state == 6 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))
+  state = 2;
       else
-      if (state == 1 && s[charpos] == 'b')
-      state = 2;
+      if (state == 6 && s[charpos] == 's')
+  state = 3;
       else
-      if (state == 2 && s[charpos] == 'b')
-      state = 2;
-      else
-	  return(false);
+    return(false);
+
       charpos++;
     }//end of while
 
   // where did I end up????
-  if (state == 2) return(true);  // end in a final state
+  if (state == 2 || state == 0) return(true);  //the final state is where one ends up
+   else return(false);  //if not returb false
+}
+
+//======================================================================================================
+//Add the PERIOD DFA here
+//RE: implemented with while and if/else
+bool period(string s)
+{
+  int state = 0;
+  int charpos = 0;
+
+  while (s[charpos] != '\0') //implement the period dfa
+    {
+      if(state == 0 && s[charpos] == '.')
+  state = 1;
+      else 
+  return (false);
+
+      charpos++;
+    }
+
+  if(state == 1) return (true);
    else return(false);
 }
 
-// ** Add the PERIOD DFA here
-// ** Done by:
+//======================================================================================================
 
-// -----  Tables -------------------------------------
+// Update the tokentype to be WORD1, WORD2, PERIOD, ERROR, etc.
+//these are the token types
+enum tokentype {ERROR, WORD1, WORD2, PERIOD, VERB, VERBNEG, VERBPAST, VERBPASTNEG, 
+IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, CONNECTOR, EOFM};
 
-// ** Update the tokentype to be WORD1, WORD2, PERIOD, ERROR, etc.
-// Feel free to add a tokentype for the end-of-file marker.
-enum tokentype {ERROR, WORD1, WORD2, PERIOD, VERB, VERBNEG, VERBPAST,
-	VERBPASTNEG, IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, 
-	CONNECTOR, EOFM};
+//these are the token names
+//string tokenName[30] = { }; for the display names of tokens
+string tokenName[30] = { "ERROR", "WORD1", "WORD2", "PERIOD", "VERB", "VERBNEG", "VERBPAST", "VERBPASTNEG", 
+"IS", "WAS", "OBJECT", "SUBJECT", "DESTINATION", "PRONOUN", "CONNECTOR", "EOFM"};
 
-// ** string tokenName[30] = { }; for the display names of tokens
+//limit of amt of reserved words
+const int amtOfWords = 19;
 
-// ** Need the reservedwords table to be set up here. 
-// ** Do not require any file input for this.
-// ** a.out should work without any additional files.
+//setting up tble with reserved words and amt of words
+string reservedwords[amtOfWords] = 
+{  "masu", "masen", "mashita", "masendeshita", "desu", "deshita", "o", "wa", "ni",
+   "watashi", "anata", "kare", "konojo", "sore", "mata" "soshite", "shikashi", "dakura", "eofm" };
 
-string letters[30] = {"b", "d", "g", "h", "j", "k", "m", "n", "p", "r", "s", "t", "w", 
-	"y", "z", "ch", "a", "i", "u", "e", "o", "I", "E", "."};
+string wordType[amtOfWords] = 
+{  "VERB", "VERBNEG", "VERBPAST", "VERBPASTNEG", "IS", "WAS", "OBJECT", "SUBJECT", "DESTINATION", 
+   "PRONOUN", "PRONOUN", "PRONOUN", "PRONOUN", "PRONOUN", "CONNECTOR", "CONNECTOR", "CONNECTOR", 
+   "CONNECTOR", "EOFM" };
 
-// word and token
-string reservedWords[19][19] = {
-{"masu", "VERB"}, 
-{"masen", "VERBNEG"},
-{"mashita", "VERBPAST"},
-{"masendeshita","VERBPASTNEG"},
-{"desu","IS"},
-{"deshita","WAS"},
-{"o","OBJECT"},
-{"wa","SUBJECT"},
-{"ni","DESTINATION"}, 
-{"watashi","PRONOUN"}, 
-{"anata","PRONOUN"}, 
-{"kare","PRONOUN"}, 
-{"kanojo","PRONOUN"}, 
-{"sore","PRONOUN"}, 
-{"mata","CONNECTOR"},
-{"soshite","CONNECTOR"}, 
-{"shikashi","CONNECTOR"}, 
-{"dakara","CONNECTOR"}, 
-{"eofm","EOFM"} 
-};
+ifstream fin;  //fin for file
 
+//======================================================================================================
 
+//matching the reserved words and returning its type 
+void matchReserved(tokentype &a, string w)
+{
+  for(int i = 0; i<amtOfWords; i++)
+  {
+    if(w == reservedwords[i])
+    {
+      string type = wordType[i];
+      for(int x = 0; x<16; x++)
+      {
+        if(type == tokenName[x])
+        {
+          a = static_cast<tokentype>(x); //static cast x
+          return;
+        }
+      }
+    }
+  }
+}
 
-
-// ------------ Scaner and Driver ----------------------- 
-
-ifstream fin;  // global stream for reading from the input file
+//======================================================================================================
 
 // Scanner processes only one word each time it is called
-// Gives back the token type and the word itself
-// ** Done by: 
+//gives back token and word itself
 int scanner(tokentype& a, string& w)
 {
+    
+    //fin declared above now reading in
+    fin >> w;
+    bool result = true;
 
-  // ** Grab the next word from the file via fin
-
-  /* 
-  2. Call the token functions one after another (if-then-else)
+    /*Calling the token functions one after another (if-then-else)
      And generate a lexical error message if both DFAs failed.
-     Let the token_type be ERROR in that case.
-  3. Make sure WORDs are checked against the reservedwords list
-     If not reserved, token_type is WORD1 or WORD2.
-  4. Return the token type & string  (pass by reference)
-  */
+     Let the token_type be ERROR in that case.*/
 
-}//the end of scanner
+    if(w == "eofm")
+    {
+        //exit if reach need be
+        exit(0);
+    }
+    else
+    {
+        result = period(w);
+        if(result) //if result is true
+        {
+            a = PERIOD;
+            return 1;
+        }
+        else
+        {
+            result = word(w);
+            if(!result)
+            {
+                a = ERROR;
+                cout << "Lexical error: " << w << " is not a valid token" << endl;
+            }
+            else
+            {
+                bool test = isupper(w[w.size()-1]);
+                if(test)
+                {
+                    a = WORD2;
+                }
+                else
+                {
+                    /*Making sure WORDs are checked against the reservedwords list
+                     If not reserved, token_type is WORD1 or WORD2.*/
+                    a = WORD1;
+                    matchReserved(a, w);
+                }
+            }
+        }
+    }
+    
+}
 
-
+//======================================================================================================
 
 // The temporary test driver to just call the scanner repeatedly  
 // This will go away after this assignment
@@ -118,23 +235,23 @@ int main()
   string theword; 
   string filename;
 
+
   cout << "Enter the input file name: ";
   cin >> filename;
 
   fin.open(filename.c_str());
 
-  // the loop continues until eofm is returned.
    while (true)
     {
-       scanner(thetype, theword);  // call the scanner
-       if (theword == "eofm") break;  // stop now
+      scanner(thetype, theword);  // call the scanner
 
        cout << "Type is:" << tokenName[thetype] << endl;
        cout << "Word is:" << theword << endl;   
+
     }
 
-   cout << "End of file is encountered." << endl;
-   fin.close();
+  fin.close();
 
 }// end
+
 
