@@ -109,7 +109,7 @@ int main()
 
 
 //-----------------------PARSER FUNCTIONS--------------------------
-//Done by: Andrew Hawn
+//Done by: Micah
 //<story> -> <sentence> { <sentence> }
 void story()
 {
@@ -122,7 +122,7 @@ void story()
       sentence();
     }
 }
-//Done by: Andrew Hawn
+//Done by: Micah
 //<sentence> -> [CONNECTOR] <noun> SUBJECT <afterSubject>
 void sentence()
 {
@@ -145,7 +145,7 @@ void sentence()
       return;
     }
 }
-//Done by: Andrew Hawn
+//Done by: Andrew
 //<afterSubject> -> <verb> <tense> PERIOD | <noun> <afterNoun>
 void afterSubject()
 {
@@ -167,7 +167,7 @@ void afterSubject()
       return;
     }
 }
-//Done by: Andrew Hawn
+//Done by: Andrew
 //<afterNoun> -> <be> PERIOD | DESTINATION <verb> <tense> PERIOD | OBJECT <afterObject>
 void afterNoun()
 {
@@ -194,7 +194,7 @@ void afterNoun()
       return;
     }
 }
-//Done by: Andrew Hawn
+//Done by: Andrew
 //<afterObject> -> <verb> <tense> PERIOD | <noun> DESTINATION <verb> <tense> PERIOD
 void afterObject()
 {
@@ -219,7 +219,7 @@ void afterObject()
       return;
     }
 }
-//Done by: Andrew Hawn
+//Done by: Andrew
 //<noun> -> WORD1 | PRONOUN
 void noun()
 {
@@ -238,7 +238,7 @@ void noun()
       return;
     }
 }
-//Done by: Andrew Hawn
+//Done by: Andrew
 //<verb> -> WORD2
 void verb()
 {
@@ -254,7 +254,7 @@ void verb()
       return;
     }
 }
-//Done by: Andrew Hawn
+//Done by: Andrew
 //<be> -> IS | WAS
 void be()
 {
@@ -273,7 +273,7 @@ void be()
       return;
     }
 }
-//Done by: Andrew Hawn
+//Done by: Andrew
 //<tense> -> VERBPAST | VERBPASTNEG | VERB | VERBNEG
 void tense()
 {
@@ -298,7 +298,7 @@ void tense()
       return;
     }
 }
-//Done by:
+//Done by: Gabriel
 bool match(tokentype thetype)
 {
   if(next_token() != thetype)
@@ -312,7 +312,7 @@ bool match(tokentype thetype)
       return true;
     }
 }
-//Done by:
+//Done by: Gabriel
 tokentype next_token()
 {
   if(tokenExists == false)
@@ -322,13 +322,13 @@ tokentype next_token()
     }
   return saved_token;
 }
-//Done by:
+//Done by: Micah
 void syntax_error1(tokentype thetype)
 {
   cout << "SYNTAX ERROR: expected " << tokenName[thetype] << " but found " << saved_lexeme << "." << endl;
   exit(1);
 }
-//Done by:
+//Done by: Micah
 void syntax_error2(string parserFunction)
 {
   cout << "SYNTAX ERROR: unexpected " << saved_lexeme << " found in " << parserFunction << "." << endl;
