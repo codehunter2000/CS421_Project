@@ -1,0 +1,25 @@
+
+GROUP#
+
+1.State who did what by indicating: 
+  Member A tasks (getEword) - who:
+  Member B tasks (gen) - who:
+  Member C tasks (dictionary) - who:
+  Who updated which parser functions with getEword and gen
+  calls? 
+
+If the member did not fully contribute to the assigned part,
+do not list his/her name!!!!!
+
+2. Each person came to the meeting?
+
+3. You have included all the required comments?
+   (updated the grammar rules in comments?)
+
+4. The project produced correct output for all 6
+   test cases?
+
+5. If you did EC error recovery,
+   test 7 worked and produced translated.txt
+   and errors.txt?
+
