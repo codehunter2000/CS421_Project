@@ -1,6 +1,9 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<vector>
+#include<cstdlib>
+#include<cctype>
 using namespace std;
 
 // INSTRUCTION:  copy and edit your parser.cpp to create this file.
@@ -33,7 +36,6 @@ using namespace std;
 //    above each non-terminal function
 // -------------------------------------------
 
-
 // Parser.cpp: 
 
 enum tokentype {
@@ -61,6 +63,7 @@ string wordType[amtOfWords] =
 
 ifstream fin;  //fin for file
 
+
 void story();
 void sentence();
 void afterSubject();
@@ -84,19 +87,7 @@ bool tokenExists = false; //no starting token
 
 void scanner(tokentype&, string&);
 
-int main()
-{
 
-	cout << "Enter the input file name: ";
-	cin >> filename;
-	fin.open(filename.c_str());
-
-	story();
-
-	//** calls the <story> to start parsing
-	//** closes the input file 
-	fin.close();
-}// end
 //** require no other input files!
 //** syntax error EC requires producing errors.text of messages
 
@@ -518,31 +509,92 @@ void scanner(tokentype& a, string& w)
 // End of Parser.cpp
 
 
+// Start of Translator additions
+// ------------------------------------------
+
+
+// GLOBALS (Gabriel -- added 12/7/18):
+
+/* Note for dictionary: japasnese words will be listed first in the dictionary,
+		the next imediate element after will be the english word*/
+vector<string> dictionary;
+ifstream lexIn;
+ofstream translated;
+
+
+
+// METHODS (Gabriel -- added 12/7/18)
+string getTranslation(string japWord)
+{
+	string englishWord;
+	string temp;
+	for (int i = 0; i < dictionary.size(); i++)
+	{
+		temp = dictionary[i];
+		if (temp == japWord)
+		{
+			englishWord = dictionary[i + 1];
+			return englishWord;
+		}
+	}
+	return NULL;
+}
+
+bool fillDictionary()
+{
+	string japWord, engWord;
+	try
+	{
+		//lexIn.open("lexicon.txt");
+		lexIn.open("C:/Users/gabri/Documents/GitHub/CS421_Project/TranslatorFiles/lexicon.txt");
+		while (!lexIn.eof())
+		{
+			lexIn >> japWord;
+			lexIn >> engWord;
+			dictionary.push_back(japWord);
+			dictionary.push_back(engWord);
+		}
+		lexIn.close();
+		return true;
+	}
+
+	catch (ifstream::failure e)
+	{
+		cout << "Problem reading from lexicon.text (see fillDictionary method)" << endl;
+		return false;
+	}
+}
+
+
 // The final test driver to start the translator
 // Done by  * Gabriel Hunt *
 int main()
 {
 	
-  //** opens the lexicon.txt file and reads it in
-  //** closes lexicon.txt 
+	// Load the dictionary 
+	bool fillSuccess = fillDictionary();
+	if (fillSuccess)
+		cout << "Dictionary filled successfully!" << endl;
+	if (!fillSuccess)
+		cout << "Problem loading dictionary" << endl;
 
 	
-
-	// read lexicon file
 
 	
   //** opens the output file translated.txt
 
-	
 	cout << "Enter the input file name: ";
 	cin >> filename;
 	fin.open(filename.c_str());
+
+	translated.open("translated.txt");
 
   //** calls the <story> to start parsing
   story();
   //** closes the input file 
   //** closes traslated.txt
   fin.close();
+  translated.close();
 }// end
 
 
