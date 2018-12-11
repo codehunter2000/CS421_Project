@@ -87,6 +87,12 @@ bool tokenExists = false; //no starting token
 
 void scanner(tokentype&, string&);
 
+string getTranslation(string);
+bool fillDictionary();
+void getEword();
+void gen(string);
+string saved_E_word;
+
 
 //** require no other input files!
 //** syntax error EC requires producing errors.text of messages
@@ -109,7 +115,7 @@ void story()
 	}
 }
 //Done by: Micah
-//<sentence> -> [CONNECTOR] <noun> SUBJECT <afterSubject>
+//<sentence> -> [CONNECTOR] #getEword# #gen# <noun> #getEword# SUBJECT #gen# <afterSubject>
 void sentence()
 {
 	cout << "Processing <sentence>" << endl;
@@ -117,13 +123,17 @@ void sentence()
 	if (next_token() == CONNECTOR)
 	{
 		match(CONNECTOR);
+		getEword();
+		gen("CONNECTOR");
 	}
 
 	switch (next_token())
 	{
 	case WORD1: case PRONOUN:
 		noun();
+		getEword();
 		match(SUBJECT);
+		gen("ACTOR");
 		afterSubject();
 		break;
 	default:
@@ -132,7 +142,7 @@ void sentence()
 	}
 }
 //Done by: Andrew
-//<afterSubject> -> <verb> <tense> PERIOD | <noun> <afterNoun>
+//<afterSubject> -> <verb> #getEword# #gen# <tense> #gen# PERIOD | <noun> #getEword# <afterNoun>
 void afterSubject()
 {
 	cout << "Processing <afterSubject>" << endl;
@@ -141,11 +151,15 @@ void afterSubject()
 	{
 	case WORD2:
 		verb();
+		getEword();
+		gen("ACTION");
 		tense();
+		gen("TENSE");
 		match(PERIOD);
 		break;
 	case WORD1: case PRONOUN:
 		noun();
+		getEword();
 		afterNoun();
 		break;
 	default:
@@ -154,7 +168,7 @@ void afterSubject()
 	}
 }
 //Done by: Andrew
-//<afterNoun> -> <be> PERIOD | DESTINATION <verb> <tense> PERIOD | OBJECT <afterObject>
+//<afterNoun> -> <be> #getEword# #gen# #gen# PERIOD | DESTINATION #gen# <verb> #getEword# #gen# <tense> #gen# PERIOD | OBJECT #gen# <afterObject>
 void afterNoun()
 {
 	cout << "Processing <afterNoun>" << endl;
@@ -163,16 +177,24 @@ void afterNoun()
 	{
 	case IS: case WAS:
 		be();
+		getEword();
+		gen("DESCRIPTION");
+		gen("TENSE");
 		match(PERIOD);
 		break;
 	case DESTINATION:
 		match(DESTINATION);
+		gen("TO");
 		verb();
+		getEword();
+		gen("ACTION");
 		tense();
+		gen("TENSE");
 		match(PERIOD);
 		break;
 	case OBJECT:
 		match(OBJECT);
+		gen("OBJECT");
 		afterObject();
 		break;
 	default:
@@ -181,7 +203,7 @@ void afterNoun()
 	}
 }
 //Done by: Andrew
-//<afterObject> -> <verb> <tense> PERIOD | <noun> DESTINATION <verb> <tense> PERIOD
+//<afterObject> -> <verb> #getEword# #gen# <tense> #gen# PERIOD | <noun> #getEword# DESTINATION #gen# <verb> #getEword# #gen# <tense> #gen# PERIOD
 void afterObject()
 {
 	cout << "Processing <afterObject>" << endl;
@@ -190,14 +212,22 @@ void afterObject()
 	{
 	case WORD2:
 		verb();
+		getEword();
+		gen("ACTION");
 		tense();
+		gen("TENSE");
 		match(PERIOD);
 		break;
 	case WORD1: case PRONOUN:
 		noun();
+		getEword();
 		match(DESTINATION);
+		gen("TO");
 		verb();
+		getEword();
+		gen("ACTION");
 		tense();
+		gen("TENSE");
 		match(PERIOD);
 		break;
 	default:
@@ -545,8 +575,8 @@ bool fillDictionary()
 	string japWord, engWord;
 	try
 	{
-		//lexIn.open("lexicon.txt");
-		lexIn.open("C:/Users/gabri/Documents/GitHub/CS421_Project/TranslatorFiles/lexicon.txt");
+		lexIn.open("lexicon.txt");
+		//lexIn.open("C:/Users/gabri/Documents/GitHub/CS421_Project/TranslatorFiles/lexicon.txt");
 		while (!lexIn.eof())
 		{
 			lexIn >> japWord;
@@ -566,6 +596,27 @@ bool fillDictionary()
 }
 
 
+void getEword()
+{
+	//search for Eword
+	//saved found word into saved_E_word for below
+}
+
+void gen(string theType)
+{
+	if (theType == "TENSE")
+	{
+		cout << theType << " to " << tokenName[saved_token] << endl;
+		translated << theType << " to " << tokenName[saved_token] << endl;
+	}
+	else
+	{
+		cout << theType << " to " << saved_E_word << endl;
+		translated << theType << " to " << saved_E_word << endl;
+
+	}
+}
+
 // The final test driver to start the translator
 // Done by  * Gabriel Hunt *
 int main()
@@ -576,7 +627,10 @@ int main()
 	if (fillSuccess)
 		cout << "Dictionary filled successfully!" << endl;
 	if (!fillSuccess)
+	{
 		cout << "Problem loading dictionary" << endl;
+		return;
+	}
 
 	
 
