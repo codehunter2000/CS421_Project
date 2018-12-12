@@ -7,6 +7,8 @@
 #include<cstdio>
 #include<time.h>
 #include<unordered_map>
+#include<algorithm>
+#include<iterator>
 using namespace std;
 
 // INSTRUCTION:  copy and edit your parser.cpp to create this file.
@@ -601,7 +603,7 @@ bool fillDictionary()
 
 void getEword()
 {
-  auto search = dictionary.find(saved_lexeme);  
+  /*auto search = dictionary.find(saved_lexeme);  
   //dictionary searched through for J word
   
   //if found save the english equivalent
@@ -609,10 +611,16 @@ void getEword()
     {
       saved_E_word = search -> second;
       return;
-    } 
+    } */
 
+  auto i = find(dictionary.begin(), dictionary.end(), saved_lexeme);
+  if (i != dictionary.end())
+  {
+	  saved_E_word = dictionary.at(i + 1);
+	  return;
+  }
+  saved_E_word = saved_lexeme; //backup case
   //save the japanese word if you need
-  saved_E_word = saved_lexeme; 
 } 
 
 void gen(string theType)
