@@ -4,9 +4,9 @@
 #include<vector>
 #include<cstdlib>
 #include<cctype>
-#include <cstdio>
-#include <time.h>
-#include <unordered_map>
+#include<cstdio>
+#include<time.h>
+#include<unordered_map>
 using namespace std;
 
 // INSTRUCTION:  copy and edit your parser.cpp to create this file.
