@@ -598,9 +598,19 @@ bool fillDictionary()
 
 void getEword()
 {
-	//search for Eword
-	//saved found word into saved_E_word for below
-}
+  auto search = dictionary.find(saved_lexeme);  
+  //dictionary searched through for J word
+  
+  //if found save the english equivalent
+  if(search != dictionary.end()) 
+    {
+      saved_E_word = search -> second;
+      return;
+    } 
+
+  //save the japanese word if you need
+  saved_E_word = saved_lexeme; 
+} 
 
 void gen(string theType)
 {
