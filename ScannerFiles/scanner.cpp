@@ -157,7 +157,6 @@ void matchReserved(tokentype &a, string w)
 {
   for(int i = 0; i<amtOfWords; i++)
     {
-      cout << w << " " << reservedwords[i] << endl;
       if(w == reservedwords[i])
 	{
 	  string type = wordType[i];
