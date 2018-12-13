@@ -6,7 +6,6 @@
 #include<cctype>
 #include<cstdio>
 #include<time.h>
-#include<unordered_map>
 #include<algorithm>
 #include<iterator>
 using namespace std;
@@ -603,25 +602,36 @@ bool fillDictionary()
 
 void getEword()
 {
-  /*auto search = dictionary.find(saved_lexeme);  
-  //dictionary searched through for J word
-  
-  //if found save the english equivalent
-  if(search != dictionary.end()) 
-    {
-      saved_E_word = search -> second;
-      return;
-    } */
+	/*
+		auto search = find(dictionary.begin(), dictionary.end(), saved_lexeme);  //will search the dictionary for the the japanese word
+	if (search != dictionary.end()) //if its found, we save it's english equivalent
+	{
+		saved_E_word = search->second;
+		return;
+	} // End If
 
-  auto i = find(dictionary.begin(), dictionary.end(), saved_lexeme);
-  if (i != dictionary.end())
-  {
-	  saved_E_word = dictionary.at(i + 1);
-	  return;
-  }
-  saved_E_word = saved_lexeme; //backup case
-  //save the japanese word if you need
-} 
+	saved_E_word = saved_lexeme; // otherwise we save the japanese word
+} // End Get English Word
+	*/
+
+	string temp;
+	string second;
+
+	for (int i = 0; i < dictionary.size(); i++)
+	{
+		temp = dictionary[i];
+		if (temp == saved_lexeme)
+		{
+			second = dictionary[i + 1];
+			saved_E_word = second;
+			return;
+		}
+	}
+
+	saved_E_word = saved_lexeme;
+
+
+}
 
 void gen(string theType)
 {
@@ -650,7 +660,7 @@ int main()
 	if (!fillSuccess)
 	{
 		cout << "Problem loading dictionary" << endl;
-		return;
+		return 1;
 	}
 
 	

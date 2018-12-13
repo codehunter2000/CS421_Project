@@ -1,4 +1,5 @@
 ﻿  translator.cpp
-c:\users\gabri\documents\github\cs421_project\translatorfiles\translator.cpp(531): warning C4018: '<': signed/unsigned mismatch
-c:\users\gabri\documents\github\cs421_project\translatorfiles\translator.cpp(300): warning C4715: 'match': not all control paths return a value
-  Scanner.vcxproj -> C:\Users\gabri\Documents\GitHub\CS421_Project\TranslatorFiles\Scanner\Debug\Scanner.exe
+c:\users\gabriel\documents\github\cs421_project\translatorfiles\translator.cpp(566): warning C4018: '<': signed/unsigned mismatch
+c:\users\gabriel\documents\github\cs421_project\translatorfiles\translator.cpp(621): warning C4018: '<': signed/unsigned mismatch
+c:\users\gabriel\documents\github\cs421_project\translatorfiles\translator.cpp(335): warning C4715: 'match': not all control paths return a value
+  Scanner.vcxproj -> C:\Users\Gabriel\Documents\GitHub\CS421_Project\TranslatorFiles\Scanner\Debug\Scanner.exe
