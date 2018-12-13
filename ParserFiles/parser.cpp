@@ -122,7 +122,7 @@ void story()
       sentence();
     }
 }
-//Done by: Micah
+//Done by: All
 //<sentence> -> [CONNECTOR] <noun> SUBJECT <afterSubject>
 void sentence()
 {
@@ -145,7 +145,7 @@ void sentence()
       return;
     }
 }
-//Done by: Andrew
+//Done by: All
 //<afterSubject> -> <verb> <tense> PERIOD | <noun> <afterNoun>
 void afterSubject()
 {
@@ -167,7 +167,7 @@ void afterSubject()
       return;
     }
 }
-//Done by: Andrew
+//Done by: All
 //<afterNoun> -> <be> PERIOD | DESTINATION <verb> <tense> PERIOD | OBJECT <afterObject>
 void afterNoun()
 {
@@ -194,7 +194,7 @@ void afterNoun()
       return;
     }
 }
-//Done by: Andrew
+//Done by: All
 //<afterObject> -> <verb> <tense> PERIOD | <noun> DESTINATION <verb> <tense> PERIOD
 void afterObject()
 {
@@ -308,7 +308,7 @@ bool match(tokentype thetype)
   else
     {
       cout << "Matched " << tokenName[thetype] << endl;
-      tokenExists = false;
+      tokenExists = false; //allows for next_token to continue
       return true;
     }
 }
@@ -317,7 +317,7 @@ tokentype next_token()
 {
   if(tokenExists == false)
     {
-      scanner(saved_token, saved_lexeme);
+      scanner(saved_token, saved_lexeme); //get new token and lexeme
       tokenExists = true;
     }
   return saved_token;
@@ -326,7 +326,7 @@ tokentype next_token()
 void syntax_error1(tokentype thetype)
 {
   cout << "SYNTAX ERROR: expected " << tokenName[thetype] << " but found " << saved_lexeme << "." << endl;
-  exit(1);
+  exit(1); //no error correction, so kill the program
 }
 //Done by: Micah
 void syntax_error2(string parserFunction)

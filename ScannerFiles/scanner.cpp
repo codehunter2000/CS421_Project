@@ -14,8 +14,9 @@ using namespace std;
 
 
 // MYTOKEN DFA to be replaced by the WORD DFA
-// RE:   dfa replaced by word dfa
- 
+// RE:   (((b|g|h|k|m|n|r) y^? (a|e|i|o|u|I|E) n^?) | ((a|e|i|o|u|I|E) n^?) | ((d|j|w|y|z) (a|e|i|o|u|I|E) n^?) | ((t s^? (a|e|i|o|u|I|E) n^?) |  (c h (a|e|i|o|u|I|E) n^?) | (s h^? (a|e|i|o|u|I|E) n^?)))*
+//Using '?' to denote 0 or 1 occurences
+//DFA Done By: Andrew Hawn 
 bool word(string s)
 {
   int state = 0; //declarations
@@ -24,81 +25,81 @@ bool word(string s)
   while (s[charpos] != '\0') //charpos of letters
     {
       if(state == 0 && (s[charpos] == 'b' ||s[charpos] == 'g' || s[charpos] == 'h' || s[charpos] == 'k' || s[charpos] == 'm' || s[charpos] == 'n' || s[charpos] == 'r'))
-  state = 1;
+	state = 1;
       else 
-      if (state == 0 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E')) 
-  state = 2;    
-      else 
-      if (state == 0 && (s[charpos] == 'd' || s[charpos] == 'j' || s[charpos] == 'w' || s[charpos] == 'y' || s[charpos] == 'z'))
-  state = 3;   
-      else 
-      if (state == 0 && s[charpos] == 's')
-  state = 4; 
-      else 
-      if (state == 0 && s[charpos] == 'c')
-  state = 5;
-      else 
-      if (state == 0 && s[charpos] == 't')
-  state = 6;
-      else 
-      if (state == 1 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))   
-  state = 2;
-      else 
-      if (state == 1 && s[charpos] == 'y')
-  state = 3;
-      else 
-      if (state == 2 && s[charpos] == 'n')
-  state = 0;
-      else 
-      if (state == 2 && (s[charpos] == 'b' ||s[charpos] == 'g' || s[charpos] == 'h' || s[charpos] == 'k' || s[charpos] == 'm' || s[charpos] == 'n' || s[charpos] == 'r'))
-  state = 1;
-      else 
-      if (state == 2 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))   
-  state = 2;
-      else 
-      if (state == 2 && (s[charpos] == 'd' || s[charpos] == 'j' || s[charpos] == 'w' || s[charpos] == 'y' || s[charpos] == 'z'))
-  state = 3;
-      else 
-      if (state == 2 && s[charpos] == 's')
-  state = 4;
-      else 
-      if (state == 2 && s[charpos] == 'c')
-  state = 5;
-      else 
-      if (state == 2 && s[charpos] == 't')
-  state = 6;
-      else 
-      if (state == 3 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))
-  state = 2;
-      else 
-      if (state == 4 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))
-  state = 2;
-      else 
-      if (state == 4 && s[charpos] == 'h')
-  state = 3;
-      else 
-      if (state == 5 && s[charpos] == 'h')
-  state = 3;
-      else 
-      if (state == 6 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))
-  state = 2;
-      else
-      if (state == 6 && s[charpos] == 's')
-  state = 3;
-      else
-    return(false);
+	if (state == 0 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E')) 
+	  state = 2;    
+	else 
+	  if (state == 0 && (s[charpos] == 'd' || s[charpos] == 'j' || s[charpos] == 'w' || s[charpos] == 'y' || s[charpos] == 'z'))
+	    state = 3;   
+	  else 
+	    if (state == 0 && s[charpos] == 's')
+	      state = 4; 
+	    else 
+	      if (state == 0 && s[charpos] == 'c')
+		state = 5;
+	      else 
+		if (state == 0 && s[charpos] == 't')
+		  state = 6;
+		else 
+		  if (state == 1 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))   
+		    state = 2;
+		  else 
+		    if (state == 1 && s[charpos] == 'y')
+		      state = 3;
+		    else 
+		      if (state == 2 && s[charpos] == 'n')
+			state = 0;
+		      else 
+			if (state == 2 && (s[charpos] == 'b' ||s[charpos] == 'g' || s[charpos] == 'h' || s[charpos] == 'k' || s[charpos] == 'm' || s[charpos] == 'n' || s[charpos] == 'r'))
+			  state = 1;
+			else 
+			  if (state == 2 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))   
+			    state = 2;
+			  else 
+			    if (state == 2 && (s[charpos] == 'd' || s[charpos] == 'j' || s[charpos] == 'w' || s[charpos] == 'y' || s[charpos] == 'z'))
+			      state = 3;
+			    else 
+			      if (state == 2 && s[charpos] == 's')
+				state = 4;
+			      else 
+				if (state == 2 && s[charpos] == 'c')
+				  state = 5;
+				else 
+				  if (state == 2 && s[charpos] == 't')
+				    state = 6;
+				  else 
+				    if (state == 3 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))
+				      state = 2;
+				    else 
+				      if (state == 4 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))
+					state = 2;
+				      else 
+					if (state == 4 && s[charpos] == 'h')
+					  state = 3;
+					else 
+					  if (state == 5 && s[charpos] == 'h')
+					    state = 3;
+					  else 
+					    if (state == 6 && (s[charpos] == 'a' || s[charpos] == 'e' ||s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u' || s[charpos] == 'I' || s[charpos] == 'E'))
+					      state = 2;
+					    else
+					      if (state == 6 && s[charpos] == 's')
+						state = 3;
+					      else
+						return(false);
 
       charpos++;
     }//end of while
 
   // where did I end up????
   if (state == 2 || state == 0) return(true);  //the final state is where one ends up
-   else return(false);  //if not returb false
+  else return(false);  //if not returb false
 }
 
 //======================================================================================================
 //Add the PERIOD DFA here
-//RE: implemented with while and if/else
+//RE: (a|...|z)^* .
 bool period(string s)
 {
   int state = 0;
@@ -107,115 +108,121 @@ bool period(string s)
   while (s[charpos] != '\0') //implement the period dfa
     {
       if(state == 0 && s[charpos] == '.')
-  state = 1;
+	state = 1;
       else 
-  return (false);
+	return (false);
 
       charpos++;
     }
 
   if(state == 1) return (true);
-   else return(false);
+  else return(false);
 }
 
 //======================================================================================================
 
+//Word Bank Done By: Gabriel
+
 // Update the tokentype to be WORD1, WORD2, PERIOD, ERROR, etc.
 //these are the token types
 enum tokentype {ERROR, WORD1, WORD2, PERIOD, VERB, VERBNEG, VERBPAST, VERBPASTNEG, 
-IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, CONNECTOR, EOFM};
+		IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, CONNECTOR, EOFM};
 
 //these are the token names
 //string tokenName[30] = { }; for the display names of tokens
 string tokenName[30] = { "ERROR", "WORD1", "WORD2", "PERIOD", "VERB", "VERBNEG", "VERBPAST", "VERBPASTNEG", 
-"IS", "WAS", "OBJECT", "SUBJECT", "DESTINATION", "PRONOUN", "CONNECTOR", "EOFM"};
+			 "IS", "WAS", "OBJECT", "SUBJECT", "DESTINATION", "PRONOUN", "CONNECTOR", "EOFM"};
 
 //limit of amt of reserved words
 const int amtOfWords = 19;
 
 //setting up tble with reserved words and amt of words
 string reservedwords[amtOfWords] = 
-{  "masu", "masen", "mashita", "masendeshita", "desu", "deshita", "o", "wa", "ni",
-   "watashi", "anata", "kare", "konojo", "sore", "mata" "soshite", "shikashi", "dakura", "eofm" };
+  {  "masu", "masen", "mashita", "masendeshita", "desu", "deshita", "o", "wa", "ni",
+     "watashi", "anata", "kare", "konojo", "sore", "mata", "soshite", "shikashi", "dakura", "eofm" };
 
 string wordType[amtOfWords] = 
-{  "VERB", "VERBNEG", "VERBPAST", "VERBPASTNEG", "IS", "WAS", "OBJECT", "SUBJECT", "DESTINATION", 
-   "PRONOUN", "PRONOUN", "PRONOUN", "PRONOUN", "PRONOUN", "CONNECTOR", "CONNECTOR", "CONNECTOR", 
-   "CONNECTOR", "EOFM" };
+  {  "VERB", "VERBNEG", "VERBPAST", "VERBPASTNEG", "IS", "WAS", "OBJECT", "SUBJECT", "DESTINATION", 
+     "PRONOUN", "PRONOUN", "PRONOUN", "PRONOUN", "PRONOUN", "CONNECTOR", "CONNECTOR", "CONNECTOR", 
+     "CONNECTOR", "EOFM" };
 
 ifstream fin;  //fin for file
 
 //======================================================================================================
 
+
+//Done By: Micah Carver
 //matching the reserved words and returning its type 
 void matchReserved(tokentype &a, string w)
 {
   for(int i = 0; i<amtOfWords; i++)
-  {
-    if(w == reservedwords[i])
     {
-      string type = wordType[i];
-      for(int x = 0; x<16; x++)
-      {
-        if(type == tokenName[x])
-        {
-          a = static_cast<tokentype>(x); //static cast x
-          return;
-        }
-      }
+      cout << w << " " << reservedwords[i] << endl;
+      if(w == reservedwords[i])
+	{
+	  string type = wordType[i];
+	  for(int x = 0; x<16; x++)
+	    {
+	      if(type == tokenName[x])
+		{
+		  a = static_cast<tokentype>(x); //static cast x
+		  return;
+		}
+	    }
+	}
     }
-  }
 }
 
 //======================================================================================================
 
+//Done by: All
 // Scanner processes only one word each time it is called
 //gives back token and word itself
-int scanner(tokentype& a, string& w)
+void scanner(tokentype& a, string& w)
 {
     
-    //fin declared above now reading in
-    fin >> w;
-    bool result = true;
+  //fin declared above now reading in
+  fin >> w;
+  bool result = true;
 
-    /*Calling the token functions one after another (if-then-else)
+  /*Calling the token functions one after another (if-then-else)
      And generate a lexical error message if both DFAs failed.
      Let the token_type be ERROR in that case.*/
 
-    if(w == "eofm")
+  if(w == "eofm")
     {
-        //exit if reach need be
-        exit(0);
+      exit(1);
+      //exit if reach need be
     }
-    else
+  else
     {
-        result = period(w);
-        if(result) //if result is true
+      result = period(w);
+      if(result) //if result is true
         {
-            a = PERIOD;
-            return 1;
+	  a = PERIOD;
+	  return;
         }
-        else
+      else
         {
-            result = word(w);
-            if(!result)
+	  result = word(w);
+	  if(!result)
             {
-                a = ERROR;
-                cout << "Lexical error: " << w << " is not a valid token" << endl;
+	      a = ERROR;
+	      cout << "Lexical error: " << w << " is not a valid token" << endl;
             }
-            else
+	  else
             {
-                bool test = isupper(w[w.size()-1]);
-                if(test)
+	      bool test = isupper(w[w.size()-1]);
+	      if(test)
                 {
-                    a = WORD2;
+		  a = WORD2;
                 }
-                else
+	      else
                 {
-                    /*Making sure WORDs are checked against the reservedwords list
-                     If not reserved, token_type is WORD1 or WORD2.*/
-                    a = WORD1;
-                    matchReserved(a, w);
+		  /*Making sure WORDs are checked against the reservedwords list
+		    If not reserved, token_type is WORD1 or WORD2.*/
+		  a = WORD1;
+		  matchReserved(a, w);
                 }
             }
         }
@@ -241,17 +248,16 @@ int main()
 
   fin.open(filename.c_str());
 
-   while (true)
+  while (true)
     {
       scanner(thetype, theword);  // call the scanner
 
-       cout << "Type is:" << tokenName[thetype] << endl;
-       cout << "Word is:" << theword << endl;   
+      cout << "Type is:" << tokenName[thetype] << endl;
+      cout << "Word is:" << theword << endl;   
 
     }
 
   fin.close();
 
 }// end
-
 

@@ -118,7 +118,7 @@ void story()
 		sentence();
 	}
 }
-//Done by: Micah
+//Done by: All
 //<sentence> -> [CONNECTOR] #getEword# #gen# <noun> #getEword# SUBJECT #gen# <afterSubject>
 void sentence()
 {
@@ -145,7 +145,7 @@ void sentence()
 		return;
 	}
 }
-//Done by: Andrew
+//Done by: All
 //<afterSubject> -> <verb> #getEword# #gen# <tense> #gen# PERIOD | <noun> #getEword# <afterNoun>
 void afterSubject()
 {
@@ -171,7 +171,7 @@ void afterSubject()
 		return;
 	}
 }
-//Done by: Andrew
+//Done by: All
 //<afterNoun> -> <be> #getEword# #gen# #gen# PERIOD | DESTINATION #gen# <verb> #getEword# #gen# <tense> #gen# PERIOD | OBJECT #gen# <afterObject>
 void afterNoun()
 {
@@ -206,7 +206,7 @@ void afterNoun()
 		return;
 	}
 }
-//Done by: Andrew
+//Done by: All
 //<afterObject> -> <verb> #getEword# #gen# <tense> #gen# PERIOD | <noun> #getEword# DESTINATION #gen# <verb> #getEword# #gen# <tense> #gen# PERIOD
 void afterObject()
 {
@@ -600,19 +600,9 @@ bool fillDictionary()
 }
 
 
+//Done By: Micah
 void getEword()
 {
-	/*
-		auto search = find(dictionary.begin(), dictionary.end(), saved_lexeme);  //will search the dictionary for the the japanese word
-	if (search != dictionary.end()) //if its found, we save it's english equivalent
-	{
-		saved_E_word = search->second;
-		return;
-	} // End If
-
-	saved_E_word = saved_lexeme; // otherwise we save the japanese word
-} // End Get English Word
-	*/
 
 	string temp;
 	string second;
@@ -633,6 +623,7 @@ void getEword()
 
 }
 
+//Done By: Andrew
 void gen(string theType)
 {
 	if (theType == "TENSE")
